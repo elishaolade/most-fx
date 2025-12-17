@@ -15,6 +15,7 @@
         "slide_z3gFhY": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/hero_iphone_17_pro__bknyzxfk2agi_mediumtall_2x_9aab6bfe-0552-4ce8-a72e-b5379acfa44d.jpg",
             "image_overlay_opacity": 0,
             "heading": "Image slide",
             "heading_size": "h1",
@@ -23,7 +24,7 @@
             "link": "",
             "button_style_secondary": false,
             "show_text_box": true,
-            "box_align": "middle-center",
+            "box_align": "bottom-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
             "color_scheme": ""
