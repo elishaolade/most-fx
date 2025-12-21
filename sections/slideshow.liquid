@@ -157,7 +157,11 @@
                 type="image/webp"
                 srcset="{{ block.settings.image_mobile | image_url }}"
               >
-              <source media="(min-width: 768px)" type="image/webp" srcset="{{ block.settings.image | image_url }}">
+              <source
+                media="(min-width: 768px)"
+                type="image/webp"
+                srcset="{{ block.settings.image | image_url: width: 300 }}"
+              >
             </picture>
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
