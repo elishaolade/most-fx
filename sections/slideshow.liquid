@@ -149,6 +149,10 @@
                 | image_tag: loading: 'lazy', height: height, sizes: sizes, widths: widths
               }}
             {%- endif -%}
+            <picture>
+              <source media="(max-width: 767.98px)" type="image/webp" srcset="{{ block.settings.image_mobile }}">
+              <source media="(min-width: 768px)" type="image/webp" srcset="{{ block.settings.image }}">
+            </picture>
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
             {%- if placeholder_slide == 1 -%}
