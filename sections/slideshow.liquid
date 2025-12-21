@@ -150,8 +150,12 @@
               }}
             {%- endif -%}
             <picture>
-              <source media="(max-width: 767.98px)" type="image/webp" srcset="{{ block.settings.image_mobile }}">
-              <source media="(min-width: 768px)" type="image/webp" srcset="{{ block.settings.image }}">
+              <source
+                media="(max-width: 767.98px)"
+                type="image/webp"
+                srcset="{{ block.settings.image_mobile | image_url }}"
+              >
+              <source media="(min-width: 768px)" type="image/webp" srcset="{{ block.settings.image | image_url }}">
             </picture>
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
