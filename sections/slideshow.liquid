@@ -152,18 +152,37 @@
               {%- endif -%}
             {% endcomment %}
             <picture>
-              <source
-                media="(max-width: 767.98px)"
-                type="image/webp"
-                srcset="{{ block.settings.image_mobile}}"
-              >
-              <source
-                media="(min-width: 768px)"
-                type="image/webp"
-                srcset="{{ block.settings.image }}"
-              >
-              <img src="{{ block.settings.image_mobile | image_url }}" height="auto" width="auto" alt="Product logo">
+              {%- if block.settings.image_mobile != blank -%}
+                <source
+                  media="(max-width: 767px)"
+                  srcset="
+                    {{ block.settings.image_mobile | image_url: width: 375 }} 375w,
+                    {{ block.settings.image_mobile | image_url: width: 750 }} 750w
+                  "
+                  sizes="100vw"
+                >
+              {%- endif -%}
+
+              {%- if block.settings.image != blank -%}
+                <source
+                  media="(min-width: 768px)"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 768 }} 768w,
+                    {{ block.settings.image | image_url: width: 1200 }} 1200w,
+                    {{ block.settings.image | image_url: width: 1920 }} 1920w
+                  "
+                  sizes="100vw"
+                >
+              {%- endif -%}
+
+              {{
+                block.settings.image
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                | escape
+              }}
             </picture>
+
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
             {%- if placeholder_slide == 1 -%}
