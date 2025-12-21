@@ -155,12 +155,12 @@
               <source
                 media="(max-width: 767.98px)"
                 type="image/webp"
-                srcset="{{ block.settings.image_mobile | image_url }}"
+                srcset="{{ block.settings.image_mobile}}"
               >
               <source
                 media="(min-width: 768px)"
                 type="image/webp"
-                srcset="{{ block.settings.image | image_url: width: 300 }}"
+                srcset="{{ block.settings.image }}"
               >
             </picture>
           {%- else -%}
