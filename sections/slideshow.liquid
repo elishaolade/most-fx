@@ -162,7 +162,7 @@
                 type="image/webp"
                 srcset="{{ block.settings.image }}"
               >
-              <img src="{{ block.settings.image_mobile }}" height="auto" width="auto" alt="Product logo">
+              <img src="{{ block.settings.image_mobile | image_url }}" height="auto" width="auto" alt="Product logo">
             </picture>
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
