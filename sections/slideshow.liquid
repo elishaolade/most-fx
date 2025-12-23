@@ -131,10 +131,10 @@
               <template>
                 <video autoplay muted loop playsinline preload="metadata">
                   {% if mobile_mp4 %}
-                    <source media="(max-width: 749px)" src="{{ mobile_mp4.url }}" type="video/mp4">
+                    <source media="(max-width: 749px)" src="{{ mobile_mp4.url | file_url }}" type="video/mp4">
                   {% endif %}
                   {% if desktop_mp4 %}
-                    <source media="(min-width: 750px)" src="{{ desktop_mp4.url }}" type="video/mp4">
+                    <source media="(min-width: 750px)" src="{{ desktop_mp4.url | file_url }}" type="video/mp4">
                   {% endif %}
                 </video>
               </template>
