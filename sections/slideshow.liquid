@@ -152,9 +152,18 @@
               {%- endif -%}
             {% endcomment %}
             {% if block.settings.mobile_video %}
-              <video>
-                <source media="(max-width: 749px)" type="video/mp4" src="{{ block.settings.mobile_video }}">
-                <source media="(min-width: 750px)" type="video/mp4" src="{{ block.settings.desktop_video }}">
+              {% liquid
+                assign desktop_mp4 = block.settings.desktop_video.sources | where: 'format', 'mp4' | first
+                assign mobile_mp4 = block.settings.mobile_video.sources | where: 'format', 'mp4' | first
+              %}
+
+              <video autoplay muted loop playsinline preload="metadata">
+                {% if mobile_mp4 %}
+                  <source media="(max-width: 749px)" src="{{ mobile_mp4.url }}" type="video/mp4">
+                {% endif %}
+                {% if desktop_mp4 %}
+                  <source media="(min-width: 750px)" src="{{ desktop_mp4.url }}" type="video/mp4">
+                {% endif %}
               </video>
             {% endif %}
             <picture>
