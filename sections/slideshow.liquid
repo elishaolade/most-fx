@@ -151,6 +151,8 @@
                 }}
               {%- endif -%}
             {% endcomment %}
+            {% if block.settings.mobile_video %}
+            {% endif %}
             <picture>
               {%- if block.settings.image_mobile != blank -%}
                 <source
