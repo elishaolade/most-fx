@@ -40,6 +40,7 @@
           "type": "slide",
           "settings": {
             "image_overlay_opacity": 0,
+            "mobile_video": "shopify://files/videos/25-POI-Compilation-Website Landing Page-Square-Branded.mp4",
             "heading": "Image slide",
             "heading_size": "h1",
             "subheading": "Tell your brand's story through images",
