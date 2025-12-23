@@ -17,7 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/desktop-2.png",
             "image_overlay_opacity": 0,
-            "image_mobile": "shopify://shop_images/hero_iphone_family__fuz5j2v5xx6y_small_2x_085e8db6-ac43-4203-8b32-b24269fc673c.jpg",
+            "image_mobile": "shopify://shop_images/mobile-2.png",
             "heading": "iPhone",
             "heading_size": "h1",
             "subheading": "Say hello to the latest generation of iPhone.",
