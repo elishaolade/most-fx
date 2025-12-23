@@ -176,9 +176,9 @@
               {%- endif -%}
 
               {{
-                block.settings.image
+                block.settings.image_mobile
                 | image_url: width: 1200
-                | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                | image_tag: loading: 'lazy', alt: block.settings.image_mobile.alt
                 | escape
               }}
             </picture>
@@ -457,6 +457,20 @@
           "type": "image_picker",
           "id": "image_mobile",
           "label": "Mobile image"
+        },
+        {
+          "type": "header",
+          "content": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_video",
+          "label": "Mobile video"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_video",
+          "label": "Desktop video"
         },
         {
           "type": "header",
