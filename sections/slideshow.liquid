@@ -126,7 +126,7 @@
               assign desktop_mp4 = block.settings.desktop_video.sources | where: 'format', 'mp4' | first
               assign mobile_mp4 = block.settings.mobile_video.sources | where: 'format', 'mp4' | first
             %}
-            <div>{{ mobile_mp4.url }}</div>
+            <div>{{ block.settings.mobile_video.sources | json }}</div>
             <deferred-media>
               <template>
                 <video autoplay muted loop playsinline preload="metadata">
