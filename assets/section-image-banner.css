@@ -109,7 +109,7 @@
     justify-content: center;
   }
 
-  .slideshow__text .banner__content.banner__content--top-center {
+  .slideshow__text.banner__content.banner__content--top-center {
     margin-top: 32px;
   }
 
