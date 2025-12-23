@@ -101,6 +101,7 @@
   .banner__content.banner__content--top-left {
     align-items: flex-start;
     justify-content: flex-start;
+    text-align: left;
   }
 
   .banner__content.banner__content--top-center {
@@ -111,11 +112,13 @@
   .banner__content.banner__content--top-right {
     align-items: flex-start;
     justify-content: flex-end;
+    text-align: right;
   }
 
   .banner__content.banner__content--middle-left {
     align-items: center;
     justify-content: flex-start;
+    text-align: left;
   }
 
   .banner__content.banner__content--middle-center {
