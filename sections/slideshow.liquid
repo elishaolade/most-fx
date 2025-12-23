@@ -121,6 +121,24 @@
         tabindex="-1"
       >
         <div class="slideshow__media banner__media media{% if block.settings.image == blank %} placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}">
+          {% if block.settings.mobile_video %}
+            {% liquid
+              assign desktop_mp4 = block.settings.desktop_video.sources | where: 'format', 'mp4' | first
+              assign mobile_mp4 = block.settings.mobile_video.sources | where: 'format', 'mp4' | first
+            %}
+            <deferred-media>
+              <template>
+                <video autoplay muted loop playsinline preload="metadata">
+                  {% if mobile_mp4 %}
+                    <source media="(max-width: 749px)" src="{{ mobile_mp4.url }}" type="video/mp4">
+                  {% endif %}
+                  {% if desktop_mp4 %}
+                    <source media="(min-width: 750px)" src="{{ desktop_mp4.url }}" type="video/mp4">
+                  {% endif %}
+                </video>
+              </template>
+            </deferred-media>
+          {% endif %}
           {%- if block.settings.image -%}
             {%- liquid
               assign height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
@@ -136,72 +154,38 @@
                 assign fetch_priority = 'high'
               endif
             -%}
-            {% comment %}
-              {%- if forloop.first %}
-                {{
-                  block.settings.image
-                  | image_url: width: 3840
-                  | image_tag: height: height, sizes: sizes, widths: widths, fetchpriority: fetch_priority
-                }}
-              {%- else -%}
-                {{
-                  block.settings.image
-                  | image_url: width: 3840
-                  | image_tag: loading: 'lazy', height: height, sizes: sizes, widths: widths
-                }}
+
+            <picture>
+              {%- if block.settings.image_mobile != blank -%}
+                <source
+                  media="(max-width: 767px)"
+                  srcset="
+                    {{ block.settings.image_mobile | image_url: width: 375 }} 375w,
+                    {{ block.settings.image_mobile | image_url: width: 750 }} 750w
+                  "
+                  sizes="100vw"
+                >
               {%- endif -%}
-            {% endcomment %}
-            {% if block.settings.mobile_video %}
-              {% liquid
-                assign desktop_mp4 = block.settings.desktop_video.sources | where: 'format', 'mp4' | first
-                assign mobile_mp4 = block.settings.mobile_video.sources | where: 'format', 'mp4' | first
-              %}
-              <deferred-media>
-                <template>
-                  <video autoplay muted loop playsinline preload="metadata">
-                    {% if mobile_mp4 %}
-                      <source media="(max-width: 749px)" src="{{ mobile_mp4.url }}" type="video/mp4">
-                    {% endif %}
-                    {% if desktop_mp4 %}
-                      <source media="(min-width: 750px)" src="{{ desktop_mp4.url }}" type="video/mp4">
-                    {% endif %}
-                  </video>
-                </template>
-              </deferred-media>
 
-            {% else %}
-              <picture>
-                {%- if block.settings.image_mobile != blank -%}
-                  <source
-                    media="(max-width: 767px)"
-                    srcset="
-                      {{ block.settings.image_mobile | image_url: width: 375 }} 375w,
-                      {{ block.settings.image_mobile | image_url: width: 750 }} 750w
-                    "
-                    sizes="100vw"
-                  >
-                {%- endif -%}
+              {%- if block.settings.image != blank -%}
+                <source
+                  media="(min-width: 768px)"
+                  srcset="
+                    {{ block.settings.image | image_url: width: 768 }} 768w,
+                    {{ block.settings.image | image_url: width: 1200 }} 1200w,
+                    {{ block.settings.image | image_url: width: 1920 }} 1920w
+                  "
+                  sizes="100vw"
+                >
+              {%- endif -%}
 
-                {%- if block.settings.image != blank -%}
-                  <source
-                    media="(min-width: 768px)"
-                    srcset="
-                      {{ block.settings.image | image_url: width: 768 }} 768w,
-                      {{ block.settings.image | image_url: width: 1200 }} 1200w,
-                      {{ block.settings.image | image_url: width: 1920 }} 1920w
-                    "
-                    sizes="100vw"
-                  >
-                {%- endif -%}
-
-                {{
-                  block.settings.image_mobile
-                  | image_url: width: 1200
-                  | image_tag: loading: 'lazy', alt: block.settings.image_mobile.alt
-                  | escape
-                }}
-              </picture>
-            {% endif %}
+              {{
+                block.settings.image_mobile
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', alt: block.settings.image_mobile.alt
+                | escape
+              }}
+            </picture>
 
           {%- else -%}
             {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
