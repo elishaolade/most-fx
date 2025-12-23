@@ -123,14 +123,19 @@
         <div class="slideshow__media banner__media media{% if block.settings.image == blank %} placeholder{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}">
           {% if block.settings.mobile_video %}
             {% liquid
-              assign desktop_src = block.settings.desktop_video.sources | where: 'mime_type', 'video/mp4' | first
               assign mobile_src = block.settings.mobile_video.sources | where: 'mime_type', 'video/mp4' | first
+              assign desktop_src = block.settings.desktop_video.sources | where: 'mime_type', 'video/mp4' | first
             %}
 
-            <pre style="white-space:pre-wrap">
-            mobile: {{ mobile_src.url }}
-            desktop: {{ desktop_src.url }}
-            </pre>
+            <video autoplay muted loop playsinline preload="metadata">
+              {% if mobile_src %}
+                <source media="(max-width: 749px)" src="https:{{ mobile_src.url }}" type="video/mp4">
+              {% endif %}
+              {% if desktop_src %}
+                <source media="(min-width: 750px)" src="https:{{ desktop_src.url }}" type="video/mp4">
+              {% endif %}
+            </video>
+
             {% comment %}
               {% liquid
                 assign desktop_mp4 = block.settings.desktop_video.sources | where: 'format', 'mp4' | first
