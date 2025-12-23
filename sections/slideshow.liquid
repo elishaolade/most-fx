@@ -152,6 +152,10 @@
               {%- endif -%}
             {% endcomment %}
             {% if block.settings.mobile_video %}
+              <video>
+                <source media="(max-width: 749px)" type="video/mp4">
+                <source media="(min-width: 750px)" type="video/mp4">
+              </video>
             {% endif %}
             <picture>
               {%- if block.settings.image_mobile != blank -%}
