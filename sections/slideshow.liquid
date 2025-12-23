@@ -138,63 +138,64 @@
                 </video>
               </template>
             </deferred-media>
-          {% endif %}
-          {%- if block.settings.image -%}
-            {%- liquid
-              assign height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
-              if section.settings.image_behavior == 'ambient'
-                assign sizes = '120vw'
-                assign widths = '450, 660, 900, 1320, 1800, 2136, 2400, 3600, 7680'
-              else
-                assign sizes = '100vw'
-                assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
-              endif
-              assign fetch_priority = 'auto'
-              if section.index == 1
-                assign fetch_priority = 'high'
-              endif
-            -%}
+          {% else %}
+            {%- if block.settings.image -%}
+              {%- liquid
+                assign height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio | round
+                if section.settings.image_behavior == 'ambient'
+                  assign sizes = '120vw'
+                  assign widths = '450, 660, 900, 1320, 1800, 2136, 2400, 3600, 7680'
+                else
+                  assign sizes = '100vw'
+                  assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+                endif
+                assign fetch_priority = 'auto'
+                if section.index == 1
+                  assign fetch_priority = 'high'
+                endif
+              -%}
 
-            <picture>
-              {%- if block.settings.image_mobile != blank -%}
-                <source
-                  media="(max-width: 767px)"
-                  srcset="
-                    {{ block.settings.image_mobile | image_url: width: 375 }} 375w,
-                    {{ block.settings.image_mobile | image_url: width: 750 }} 750w
-                  "
-                  sizes="100vw"
-                >
-              {%- endif -%}
+              <picture>
+                {%- if block.settings.image_mobile != blank -%}
+                  <source
+                    media="(max-width: 767px)"
+                    srcset="
+                      {{ block.settings.image_mobile | image_url: width: 375 }} 375w,
+                      {{ block.settings.image_mobile | image_url: width: 750 }} 750w
+                    "
+                    sizes="100vw"
+                  >
+                {%- endif -%}
 
-              {%- if block.settings.image != blank -%}
-                <source
-                  media="(min-width: 768px)"
-                  srcset="
-                    {{ block.settings.image | image_url: width: 768 }} 768w,
-                    {{ block.settings.image | image_url: width: 1200 }} 1200w,
-                    {{ block.settings.image | image_url: width: 1920 }} 1920w
-                  "
-                  sizes="100vw"
-                >
-              {%- endif -%}
+                {%- if block.settings.image != blank -%}
+                  <source
+                    media="(min-width: 768px)"
+                    srcset="
+                      {{ block.settings.image | image_url: width: 768 }} 768w,
+                      {{ block.settings.image | image_url: width: 1200 }} 1200w,
+                      {{ block.settings.image | image_url: width: 1920 }} 1920w
+                    "
+                    sizes="100vw"
+                  >
+                {%- endif -%}
 
-              {{
-                block.settings.image_mobile
-                | image_url: width: 1200
-                | image_tag: loading: 'lazy', alt: block.settings.image_mobile.alt
-                | escape
-              }}
-            </picture>
+                {{
+                  block.settings.image_mobile
+                  | image_url: width: 1200
+                  | image_tag: loading: 'lazy', alt: block.settings.image_mobile.alt
+                  | escape
+                }}
+              </picture>
 
-          {%- else -%}
-            {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
-            {%- if placeholder_slide == 1 -%}
-              {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- else -%}
-              {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- assign placeholder_slide = forloop.index | modulo: 2 -%}
+              {%- if placeholder_slide == 1 -%}
+                {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- else -%}
+                {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
             {%- endif -%}
-          {%- endif -%}
+          {% endif %}
         </div>
         <div class="slideshow__text-wrapper banner__content banner__content--{{ block.settings.box_align }} page-width{% if block.settings.show_text_box == false %} banner--desktop-transparent{% endif %}{% if settings.animations_reveal_on_scroll and forloop.index == 1 %} scroll-trigger animate--slide-in{% endif %}">
           <div class="slideshow__text banner__box content-container content-container--full-width-mobile color-{{ block.settings.color_scheme }} gradient slideshow__text--{{ block.settings.text_alignment }} slideshow__text-mobile--{{ block.settings.text_alignment_mobile }}">
