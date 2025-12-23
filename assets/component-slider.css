@@ -271,7 +271,7 @@ slider-component.slider-component-full-width {
 }
 
 .slider-counter__link--active.slider-counter__link--dots .dot {
-  background-color: rgb(var(--color-button));
+  background-color: rgb(var(--color-foreground));
 }
 
 @media screen and (forced-colors: active) {
