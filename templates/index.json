@@ -38,6 +38,7 @@
         },
         "slide_mVA4gQ": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image_overlay_opacity": 0,
             "mobile_video": "shopify://files/videos/25-POI-Compilation-Website Landing Page-Square-Branded.mp4",
